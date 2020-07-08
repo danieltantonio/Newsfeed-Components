@@ -27,4 +27,15 @@
 
 .menu--open {
   display: block;
+  animation: slideIn 0.5s;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-200px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
 }
