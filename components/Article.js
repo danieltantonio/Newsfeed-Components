@@ -85,6 +85,15 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  { //STEP 5
+    title: 'HOT CHICKS MONTHLY! 2020',
+    date: 'Jun 8th, 2020',
+    firstParagraph: `CHEEP CHEEP CHEEP CHEEP!`,
+
+    secondParagraph: `CHIRP CHIRP CHIRP CHIRP!`,
+
+    thirdParagraph: `TWEET TWEET TWEET TWEET!`
   }
 ];
 
@@ -111,3 +120,44 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
+
+// STEP 1
+function articleMaker(articleDataObj) {
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const dateText = document.createElement('p');
+  const expandButton = document.createElement('span');
+
+  article.classList.add('article');
+  dateText.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  articleTitle.textContent = articleDataObj.title;
+  dateText.textContent = articleDataObj.date;
+  expandButton.textContent = "+";
+
+  article.appendChild(articleTitle);
+  article.appendChild(dateText);
+  
+  for(let i = 0; i < 3; i++) {
+    const paragraph = document.createElement('p');
+    const objKeys = Object.keys(data[0]).filter(key => !key.includes('title') && !key.includes('date'));
+    paragraph.textContent = articleDataObj[objKeys[i]];
+    article.appendChild(paragraph);
+  }
+
+  article.appendChild(expandButton);
+
+  // STEP 2
+  expandButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  });
+
+  // STEP 3
+  return article;
+}
+
+// STEP 4
+data.forEach(obj => {
+  document.querySelector('.articles').appendChild(articleMaker(obj));
+});
